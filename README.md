@@ -62,7 +62,7 @@ Claude Desktop provides native support for MCP servers. To integrate Odybook:
   "mcpServers": {
     "odybook": {
       "command": "node",
-      "args": ["/Users/chainsona/Code/src/github.com/odybook/odybook-mcp/dist/index.js"],
+      "args": ["/absolute/path/to/odybook-mcp/dist/index.js"],
       "env": {
         "ODYBOOK_API_KEY": "YOUR_API_KEY_HERE",
         "ODYBOOK_API_URL": "https://odybook.com/api"
