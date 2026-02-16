@@ -11,13 +11,18 @@ const API_KEY = process.env.ODYBOOK_API_KEY;
 export class ApiClient {
   private async request(path: string, options: RequestInit = {}) {
     const url = `${API_URL}${path}`;
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+      ...(options.headers as Record<string, string>),
+    };
+
+    if (API_KEY) {
+      headers["Authorization"] = `Bearer ${API_KEY}`;
+    }
+
     const response = await fetch(url, {
       ...options,
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${API_KEY}`,
-        ...options.headers,
-      },
+      headers,
     });
 
     if (!response.ok) {

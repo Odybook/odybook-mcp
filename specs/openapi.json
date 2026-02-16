@@ -18,6 +18,7 @@
         "description": "Executes MCP tools via JSON-RPC. Used by MCP clients to bridge LLM tools to the Odybook backend.",
         "operationId": "callMcpTool",
         "security": [
+          {},
           {
             "bearerAuth": []
           }

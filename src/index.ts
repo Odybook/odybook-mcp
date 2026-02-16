@@ -14,7 +14,7 @@ const server = new McpServer({
  */
 server.tool(
   "search_tours",
-  "Search for tours and experiences by location and date. Returns a list of experiences with basic pricing and availability.",
+  "Search for public tours and experiences by location and date. This tool is public and does not require an API key.",
   {
     location: z.string().optional().describe("City or country name (e.g., 'Paris', 'Germany')"),
     date: z.string().optional().describe("Target date in YYYY-MM-DD format"),
@@ -37,7 +37,7 @@ server.tool(
  */
 server.tool(
   "check_availability",
-  "Verify real-time availability and retrieve detailed pricing for a specific experience.",
+  "Verify real-time availability and retrieve detailed pricing for a specific experience. This tool is public and does not require an API key.",
   {
     experience_id: z.string().describe("UUID of the experience"),
     date: z.string().describe("Target date in YYYY-MM-DD format"),
@@ -61,7 +61,7 @@ server.tool(
  */
 server.tool(
   "create_booking_hold",
-  "Initialize a temporary booking hold. Reserves capacity for a limited time while the customer completes payment through the Odybook portal.",
+  "Initialize a temporary booking hold. Reserves capacity for a limited time. This tool requires a valid ODYBOOK_API_KEY.",
   {
     experience_id: z.string().describe("UUID of the experience"),
     date: z.string().describe("Date in YYYY-MM-DD format"),

@@ -42,7 +42,7 @@ The server expects the following environment variables. You can define these in 
 
 | Variable | Description |
 |----------|-------------|
-| `ODYBOOK_API_KEY` | Your unique partner API key. |
+| `ODYBOOK_API_KEY` | (Optional) Your partner API key for protected routes like booking holds. |
 | `ODYBOOK_API_URL` | The Odybook API endpoint (default: `https://odybook.com/api`). |
 
 ## Client Integration
