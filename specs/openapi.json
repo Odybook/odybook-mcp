@@ -1,0 +1,124 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Odybook Partner API",
+    "description": "API for Odybook partners to search experiences, check availability, and manage booking holds.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://odybook.com/api",
+      "description": "Production API"
+    }
+  ],
+  "paths": {
+    "/mcp": {
+      "post": {
+        "summary": "MCP Tool Execution",
+        "description": "Executes MCP tools via JSON-RPC. Used by MCP clients to bridge LLM tools to the Odybook backend.",
+        "operationId": "callMcpTool",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpRequest"
+              },
+              "examples": {
+                "search_tours": {
+                  "value": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "tools/call",
+                    "params": {
+                      "name": "search_tours",
+                      "arguments": {
+                        "location": "Paris"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful tool execution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "McpRequest": {
+        "type": "object",
+        "required": ["jsonrpc", "method", "params"],
+        "properties": {
+          "jsonrpc": { "type": "string", "enum": ["2.0"] },
+          "id": { "type": "integer" },
+          "method": { "type": "string", "enum": ["tools/call"] },
+          "params": {
+            "type": "object",
+            "required": ["name", "arguments"],
+            "properties": {
+              "name": { 
+                "type": "string", 
+                "enum": ["search_tours", "check_availability", "create_booking_hold"] 
+              },
+              "arguments": { "type": "object" }
+            }
+          }
+        }
+      },
+      "McpResponse": {
+        "type": "object",
+        "properties": {
+          "jsonrpc": { "type": "string", "enum": ["2.0"] },
+          "id": { "type": "integer" },
+          "result": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": { "type": "string" },
+                    "text": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": { "type": "integer" },
+              "message": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

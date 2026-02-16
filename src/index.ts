@@ -14,9 +14,10 @@ const server = new McpServer({
  */
 server.tool(
   "search_tours",
+  "Search for tours and experiences by location and date. Returns a list of experiences with basic pricing and availability.",
   {
-    location: z.string().optional().describe("Location filter (city or country name)"),
-    date: z.string().optional().describe("Optional date to check availability (YYYY-MM-DD)"),
+    location: z.string().optional().describe("City or country name (e.g., 'Paris', 'Germany')"),
+    date: z.string().optional().describe("Target date in YYYY-MM-DD format"),
   },
   async ({ location, date }) => {
     try {
@@ -36,10 +37,11 @@ server.tool(
  */
 server.tool(
   "check_availability",
+  "Verify real-time availability and retrieve detailed pricing for a specific experience.",
   {
     experience_id: z.string().describe("UUID of the experience"),
-    date: z.string().describe("Date (YYYY-MM-DD)"),
-    pax: z.number().min(1).describe("Number of guests"),
+    date: z.string().describe("Target date in YYYY-MM-DD format"),
+    pax: z.number().min(1).describe("Number of guests/pax"),
   },
   async ({ experience_id, date, pax }) => {
     try {
@@ -59,10 +61,11 @@ server.tool(
  */
 server.tool(
   "create_booking_hold",
+  "Initialize a temporary booking hold. Reserves capacity for a limited time while the customer completes payment through the Odybook portal.",
   {
     experience_id: z.string().describe("UUID of the experience"),
-    date: z.string().describe("Date (YYYY-MM-DD)"),
-    pax: z.number().min(1).describe("Number of guests"),
+    date: z.string().describe("Date in YYYY-MM-DD format"),
+    pax: z.number().min(1).describe("Number of guests/pax"),
     customer_name: z.string().describe("Customer full name"),
     customer_email: z.string().email().describe("Customer email"),
   },

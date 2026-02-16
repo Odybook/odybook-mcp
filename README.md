@@ -76,12 +76,25 @@ Claude Desktop provides native support for MCP servers. To integrate Odybook:
 
 ### ChatGPT (Custom GPTs)
 
-To use this with ChatGPT, the server must be hosted and exposed as an SSE (Server-Sent Events) endpoint. Once hosted:
+To use Odybook with ChatGPT, you can use the Odybook backend as a Custom Action.
 
-1. Create a "Custom GPT" in the ChatGPT dashboard.
-2. Under "Configure", add a new "Action".
-3. Provide the OpenAPI specification that points to your hosted MCP endpoint.
-4. Set the authentication header to use your `ODYBOOK_API_KEY`.
+1.  **Open Specification**: Use the provided OpenAPI spec at `specs/openapi.json`.
+2.  **Create Action**: In your Custom GPT configuration, under "Actions", click "Create new action".
+3.  **Import Schema**: Paste the content of `specs/openapi.json`.
+4.  **Authentication**: Select "API Key" as the authentication type and "Bearer" as the auth scheme. Paste your `ODYBOOK_API_KEY`.
+5.  **Test**: ChatGPT will now be able to call Odybook tools via the `/api/mcp` bridge.
+
+## Marketplace Submission
+
+This server is designed to meet the requirements for official MCP registries:
+
+- **Safety Annotations**: All tools include clear descriptions and follow security best practices.
+- **Vendor Neutrality**: Implements the standard Model Context Protocol without proprietary extensions.
+- **Portability**: Verified to run on macOS and Windows via Node.js.
+
+### Submission Links
+- [Claude MCP Directory Form](https://modelcontextprotocol.io)
+- [GPT Store Guidelines](https://openai.com/blog/introducing-the-gpt-store)
 
 ## Tool Reference
 
