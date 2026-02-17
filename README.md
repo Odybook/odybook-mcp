@@ -109,6 +109,7 @@ Verify if an experience has enough capacity for a given date.
 - **Arguments**:
   - `experience_id` (string): UUID of the experience.
   - `date` (string): Date in `YYYY-MM-DD` format.
+  - `time` (string, optional): Specific time slot (e.g., "10:00").
   - `pax` (number): Number of guests.
 
 ### `create_booking_hold`
@@ -116,6 +117,7 @@ Initiate a temporary booking hold.
 - **Arguments**:
   - `experience_id` (string): UUID of the experience.
   - `date` (string): Target date.
+  - `time` (string): Specific time slot (e.g., "14:00").
   - `pax` (number): Number of guests.
   - `customer_name` (string): Customer's full name.
   - `customer_email` (string): Customer's email address.

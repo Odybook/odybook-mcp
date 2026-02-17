@@ -41,11 +41,12 @@ server.tool(
   {
     experience_id: z.string().describe("UUID of the experience"),
     date: z.string().describe("Target date in YYYY-MM-DD format"),
+    time: z.string().optional().describe("Optional specific time slot (e.g., '10:00')"),
     pax: z.number().min(1).describe("Number of guests/pax"),
   },
-  async ({ experience_id, date, pax }) => {
+  async ({ experience_id, date, time, pax }) => {
     try {
-      const result = await apiClient.checkAvailability(experience_id, date, pax);
+      const result = await apiClient.checkAvailability(experience_id, date, pax, time);
       return result;
     } catch (error: any) {
       return { 
@@ -65,6 +66,7 @@ server.tool(
   {
     experience_id: z.string().describe("UUID of the experience"),
     date: z.string().describe("Date in YYYY-MM-DD format"),
+    time: z.string().describe("Specific time slot (e.g., '14:00')"),
     pax: z.number().min(1).describe("Number of guests/pax"),
     customer_name: z.string().describe("Customer full name"),
     customer_email: z.string().email().describe("Customer email"),

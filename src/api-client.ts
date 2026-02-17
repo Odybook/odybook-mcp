@@ -45,8 +45,8 @@ export class ApiClient {
   /**
    * Check availability for a specific tour
    */
-  async checkAvailability(experience_id: string, date: string, pax: number) {
-    return this.mcpCall("check_availability", { experience_id, date, pax });
+  async checkAvailability(experience_id: string, date: string, pax: number, time?: string) {
+    return this.mcpCall("check_availability", { experience_id, date, pax, time });
   }
 
   /**
